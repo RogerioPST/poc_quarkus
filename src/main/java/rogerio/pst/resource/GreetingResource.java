@@ -2,12 +2,16 @@ package rogerio.pst.resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import io.quarkus.qute.Qute;
+import io.quarkus.qute.Template;
+import io.quarkus.qute.TemplateInstance;
 import io.quarkus.vertx.http.runtime.filters.Filters;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Inject;
@@ -43,6 +47,52 @@ public class GreetingResource {
 	Validator validator;
 
 	private static final List<Developer> developers = new ArrayList<>();
+	
+	@Inject
+	Template hello;
+	//https://quarkus.io/guides/qute-reference
+	
+	
+	
+	@GET
+	@Path("/template")
+	@Produces(MediaType.TEXT_PLAIN)
+	public TemplateInstance helloTemplate() {
+	 final String name = "Alex";
+	 
+	 String teste = Qute.fmt("Hello {}!", "Lucy"); 
+	// => Hello Lucy!
+
+	Qute.fmt("Hello {name} {surname ?: 'Default'}!", Map.of("name", "Andy")); 
+	// => Hello Andy Default!
+
+	Qute.fmt("<html>{header}</html>").contentType("text/html").data("header", "<h1>My header</h1>").render(); 
+	// <html>&lt;h1&gt;Header&lt;/h1&gt;</html> 
+
+	Qute.fmt("I am {#if ok}happy{#else}sad{/if}!", Map.of("ok", true)); 
+	// => I am happy!
+	 return hello.data("name", name);	
+	}
+
+	@GET
+	@Path("/template/str")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String helloTemplateString() {	 
+	 
+	 String teste = Qute.fmt("Hello {}!", "Lucy"); 
+	// => Hello Lucy!
+
+	teste =Qute.fmt("Hello {name} {surname ?: 'Default'}!", Map.of("name", "Andy")); 
+	// => Hello Andy Default!
+
+	teste = Qute.fmt("<html>{header}</html>").contentType("text/html").data("header", "<h1>My header</h1>").render(); 
+	// <html>&lt;h1&gt;Header&lt;/h1&gt;</html> 
+
+	teste = Qute.fmt("I am {#if ok}happy{#else}sad{/if}!", Map.of("ok", true)); 
+	// => I am happy!
+	return teste;
+	}
+	
 
 	// Validating Objects Programmatically ; instead of using a declarative way with
 	// @Valid annotations.
