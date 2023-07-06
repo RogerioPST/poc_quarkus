@@ -32,8 +32,8 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-rest-client</artifactId>
         </dependency>
-        
-                <dependency>
+       
+       <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-resteasy-qute</artifactId>
         </dependency>
@@ -47,6 +47,20 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-scheduler</artifactId>
         </dependency>
+        
+    <!-- SEGURANCA -->
+    <dependency>
+	    <groupId>io.quarkus</groupId>
+	    <artifactId>quarkus-oidc</artifactId>
+	</dependency>
+	<dependency>
+	    <groupId>io.quarkus</groupId>
+	    <artifactId>quarkus-oidc-client</artifactId>
+	</dependency> 
+	<dependency>
+	    <groupId>io.quarkus</groupId>
+	    <artifactId>quarkus-oidc-token-propagation</artifactId>
+	</dependency>  	    
         
     <dependency>
 			<groupId>io.quarkus</groupId>
