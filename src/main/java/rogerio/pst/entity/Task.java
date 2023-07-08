@@ -6,13 +6,11 @@ import java.util.Objects;
 import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
-import jakarta.json.bind.annotation.JsonbDateFormat;
-
 public class Task {
 	public String description;
 	@Schema(description = "Flag indicating the task is complete")
 	public Boolean complete;
-	@JsonbDateFormat("yyyy-MM-dd'T'HH:mm")
+	//@JsonbDateFormat("yyyy-MM-dd'T'HH:mm")
 	@Schema(example = "2019-12-25T06:30", type = SchemaType.STRING, implementation = LocalDateTime.class, pattern = "yyyy-MM-dd'T'HH:mm", description = "Date and time for the reminder.")
 	public LocalDateTime reminder;
 
